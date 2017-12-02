@@ -8,7 +8,7 @@ spec:
   hostNetwork: true
   containers:
   - name: kea-dhcp4
-    image: randomcoww/k8s-kea:latest
+    image: randomcoww/kea:latest
     args:
     - kea-dhcp4
     env:
