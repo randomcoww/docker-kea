@@ -9,15 +9,15 @@ ENV KEA_BRANCH 1_3_0
 RUN set -x \
   \
   && apk add --no-cache --virtual .build-deps \
-      libressl \
-      mariadb-dev \
-      postgresql-dev \
-      boost-dev \
-      autoconf \
-      make \
-      automake \
-      libtool \
-      g++ \
+    libressl \
+    mariadb-dev \
+    postgresql-dev \
+    boost-dev \
+    autoconf \
+    make \
+    automake \
+    libtool \
+    g++ \
   \
   && mkdir -p /usr/src \
   \
@@ -29,13 +29,13 @@ RUN set -x \
   && cd /usr/src/log4cplus-$LOG_VERSION \
   \
   && autoreconf \
-      --install \
-      --force \
-      --warnings=all \
+    --install \
+    --force \
+    --warnings=all \
   && CXXFLAGS='-Os' ./configure \
-      --prefix=/usr/local \
-      --with-working-locale \
-      --enable-static=false \
+    --prefix=/usr/local \
+    --with-working-locale \
+    --enable-static=false \
   && make -j "$(getconf _NPROCESSORS_ONLN)" \
   && make install \
   \
@@ -47,16 +47,16 @@ RUN set -x \
   && cd /usr/src/kea-$KEA_BRANCH \
   \
   && autoreconf \
-      --install \
+    --install \
   && CXXFLAGS='-Os' ./configure \
-      --prefix=/usr/local \
-      --sysconfdir=/etc \
-      --localstatedir=/var \
-      --with-log4cplus=/usr/local/lib \
-      --with-dhcp-mysql \
-      --with-dhcp-pgsql \
-      --with-openssl \
-      --enable-static=false \
+    --prefix=/usr/local \
+    --sysconfdir=/etc \
+    --localstatedir=/var \
+    --with-log4cplus=/usr/local/lib \
+    --with-dhcp-mysql \
+    --with-dhcp-pgsql \
+    --with-openssl \
+    --enable-static=false \
   && make -j "$(getconf _NPROCESSORS_ONLN)" \
   && make install \
   \
