@@ -3,8 +3,8 @@
 
 FROM alpine:latest
 
-ENV LOG_VERSION REL_1_2_0
-ENV KEA_BRANCH 1_3_0
+ENV LOG_VERSION REL_1_2_1
+ENV KEA_VERSION 1.3.0
 
 RUN set -x \
   \
@@ -19,11 +19,10 @@ RUN set -x \
     libtool \
     g++ \
   \
-  && mkdir -p /usr/src \
-  \
 ## build log4cplus
   && cd / \
   && wget -O log4cplus.zip https://github.com/log4cplus/log4cplus/archive/$LOG_VERSION.zip \
+  && mkdir -p /usr/src \
   && unzip -d /usr/src log4cplus.zip \
   && rm log4cplus.zip \
   && cd /usr/src/log4cplus-$LOG_VERSION \
@@ -41,10 +40,11 @@ RUN set -x \
   \
 ## build kea
   && cd / \
-  && wget -O kea.zip https://github.com/isc-projects/kea/archive/v$KEA_BRANCH.zip \
-  && unzip -d /usr/src kea.zip \
-  && rm kea.zip \
-  && cd /usr/src/kea-$KEA_BRANCH \
+  && wget -O kea.tar.gz https://ftp.isc.org/isc/kea/$KEA_VERSION/kea-$KEA_VERSION.tar.gz \
+  && mkdir -p /usr/src/kea \
+  && tar xf kea.tar.gz --strip-components=1 -C /usr/src/kea \
+  && rm kea.tar.gz \
+  && cd /usr/src/kea \
   \
   && autoreconf \
     --install \
