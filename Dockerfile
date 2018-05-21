@@ -4,7 +4,7 @@
 FROM alpine:latest
 
 ENV LOG_VERSION REL_1_2_1
-ENV KEA_VERSION 1.3.0
+ENV KEA_VERSION kea-1-4-0-beta
 
 RUN set -x \
   \
@@ -40,7 +40,7 @@ RUN set -x \
   \
 ## build kea
   && cd / \
-  && wget -O kea.tar.gz https://ftp.isc.org/isc/kea/$KEA_VERSION/kea-$KEA_VERSION.tar.gz \
+  && wget -O kea.tar.gz https://www.isc.org/downloads/file/$KEA_VERSION/?version=tar-gz \
   && mkdir -p /usr/src/kea \
   && tar xf kea.tar.gz --strip-components=1 -C /usr/src/kea \
   && rm kea.tar.gz \
