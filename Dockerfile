@@ -4,7 +4,7 @@
 FROM alpine:latest
 
 ENV LOG_VERSION REL_1_2_1
-ENV KEA_VERSION kea-1-4-0-beta
+ENV KEA_VERSION kea-1-4-0
 
 RUN set -x \
   \
