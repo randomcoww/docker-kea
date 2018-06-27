@@ -1,7 +1,7 @@
 ## based on haproxy dockerfile
 ## https://github.com/docker-library/haproxy/blob/master/1.8/alpine/Dockerfile
 
-FROM alpine:latest
+FROM alpine:edge
 
 ENV LOG_VERSION REL_1_2_1
 ENV KEA_VERSION kea-1-4-0
