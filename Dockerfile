@@ -3,40 +3,21 @@
 
 FROM alpine:edge
 
-ENV LOG_VERSION REL_1_2_1
-ENV KEA_VERSION kea-1-4-0
+ENV KEA_VERSION kea-1-4-0-p1
 
 RUN set -x \
   \
+  && echo http://dl-cdn.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories \
   && apk add --no-cache --virtual .build-deps \
-    libressl \
     mariadb-dev \
     postgresql-dev \
     boost-dev \
+    log4cplus-dev \
     autoconf \
     make \
     automake \
     libtool \
     g++ \
-  \
-## build log4cplus
-  && cd / \
-  && wget -O log4cplus.zip https://github.com/log4cplus/log4cplus/archive/$LOG_VERSION.zip \
-  && mkdir -p /usr/src \
-  && unzip -d /usr/src log4cplus.zip \
-  && rm log4cplus.zip \
-  && cd /usr/src/log4cplus-$LOG_VERSION \
-  \
-  && autoreconf \
-    --install \
-    --force \
-    --warnings=all \
-  && CXXFLAGS='-Os' ./configure \
-    --prefix=/usr/local \
-    --with-working-locale \
-    --enable-static=false \
-  && make -j "$(getconf _NPROCESSORS_ONLN)" \
-  && make install \
   \
 ## build kea
   && cd / \
@@ -52,9 +33,8 @@ RUN set -x \
     --prefix=/usr/local \
     --sysconfdir=/etc \
     --localstatedir=/var \
-    --with-log4cplus=/usr/local/lib \
-    --with-dhcp-mysql \
-    --with-dhcp-pgsql \
+    --with-mysql \
+    --with-pgsql \
     --with-openssl \
     --enable-static=false \
   && make -j "$(getconf _NPROCESSORS_ONLN)" \
