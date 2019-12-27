@@ -49,6 +49,3 @@ RUN set -x \
   )" \
   && apk add --virtual .kea-rundeps $runDeps \
   && apk del .build-deps
-
-COPY docker-entrypoint.sh /
-ENTRYPOINT ["/docker-entrypoint.sh"]
