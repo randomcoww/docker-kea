@@ -1,6 +1,6 @@
 FROM alpine:edge
 
-ENV KEA_URL https://downloads.isc.org/isc/kea/1.6.1/kea-1.6.1.tar.gz
+ENV KEA_URL https://downloads.isc.org/isc/kea/1.6.2/kea-1.6.2.tar.gz
 
 RUN set -x \
   \
