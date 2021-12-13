@@ -1,6 +1,6 @@
 FROM alpine:edge
 
-ARG KEA_URL=https://downloads.isc.org/isc/kea/1.8.2/kea-1.8.2.tar.gz
+ARG VERSION
 
 RUN set -x \
   \
@@ -18,7 +18,7 @@ RUN set -x \
   \
 ## build kea
   && cd / \
-  && wget -O kea.tar.gz $KEA_URL \
+  && wget -O kea.tar.gz https://downloads.isc.org/isc/kea/$VERSION/kea-$VERSION.tar.gz \
   && mkdir -p /usr/src/kea \
   && tar xf kea.tar.gz --strip-components=1 -C /usr/src/kea \
   && rm kea.tar.gz \
