@@ -1,17 +1,17 @@
 ### Image build
 
 ```
-mkdir -p build
-export TMPDIR=$(pwd)/build
-
 VERSION=2.0.0
+TAG=ghcr.io/randomcoww/kea:$VERSION
 
-podman build \
+buildah build \
   --build-arg VERSION=$VERSION \
   -f Dockerfile \
-  -t ghcr.io/randomcoww/kea:$VERSION
-```
+  -t localtemp
 
-```
-podman push ghcr.io/randomcoww/kea:$VERSION
+container=$(buildah from localtemp)
+buildah run --net=none $container -- rm /etc/hosts
+buildah commit $container $TAG
+
+buildah push $TAG
 ```
